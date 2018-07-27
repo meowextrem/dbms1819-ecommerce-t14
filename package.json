@@ -1,0 +1,30 @@
+{
+  "name": "dbms1819-ecommerce-t14",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aiverkeith/dbms1819-ecommerce-t14.git"
+  },
+  "author": "Aiver Keith De Guzman, Sweeney Vista",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aiverkeith/dbms1819-ecommerce-t14/issues"
+  },
+  "homepage": "https://github.com/aiverkeith/dbms1819-ecommerce-t14#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "pg": "^7.4.3",
+    "procfile": "^0.1.1"
+  },
+  "engines":{
+    "node": "v8.11.3",
+    "npm": "5.6.0"
+  }
+}

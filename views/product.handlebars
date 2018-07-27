@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+
+{{#each products}}
+	<img src="/static/{{this.primary_picture}}" >
+	<div style="color: white">
+		<p>{{this.name}} = Php {{this.price}}</p>
+	</div>
+
+{{/each}}

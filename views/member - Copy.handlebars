@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<a href="sweeney">Sweeney</a>
+			<a href="aiver">Aiver</a>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-hover">
+			<tbody>
+				<tr>
+					<td>
+						<img src="{{imageUrl}}" height="250" width="250"></br>
+					</td>
+					
+					
+					
+				</tr>
+				<tr>
+					<td>
+						Name: {{name}} </br>
+						Email: {{email}} </br>
+						Phone: {{phone}} </br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Hobbies</label>
+						<ul>
+						  {{#each hobbies}}
+						  <li>{{this}}</li>
+						  {{/each}}
+						</ul>
+					</td>
+
+				</tr>
+			</tbody>
+	</table>
+		</div>
+	</div>
+
+</div>
+
+
+
+

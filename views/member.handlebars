@@ -1,0 +1,66 @@
+<div class="container">
+	<div class="row">
+        <h1>DBMS Profile <br><small>Assignment No. 2</small></h1>
+        <div class="text-center">
+	        <a href="sweeney" class="text-center">Sweeney</a>
+			<a href="aiver" class="text-center">Aiver</a>
+        </div>
+	<!-- Contenedor -->
+	<ul id="accordion" class="accordion">
+    <li>
+<div class="col col_4 dbms">
+<img class="img-responsive vistasweeney" alt="vistasweeney" src="{{imageUrl}}">
+<div class="edit-pic">
+<a href="{{fblink}}" target="_blank" class="fa fa-facebook" style="background: blue"></a>
+<a href="{{email}}" target="_blank" class="fa fa-google" style="background: brown"></a>
+
+
+
+</div>
+<div class="username">
+
+    <h2>{{name}}<small><i class="fa fa-map-marker"></i>{{home}}</small></h2>
+    <p><i class="fa fa-briefcase"></i> {{work}}</p>
+    
+   
+</div>
+    
+</div>
+        
+    </li>
+		<li>
+			<div class="link"><i class="fa fa-globe"></i>About<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu" >
+				<li><a href="#">Date of Birth : {{birthday}}</a></li>
+				<li><a href="#">Address : {{address}}</a></li>
+				<li><a href="mailto:{{email}}">Email : {{email}}</a></li>
+				<li><a href="#">Phone : {{phone}}</a></li>
+			</ul>
+		</li>
+		<li class="default open">
+			<div class="link"><i class="fa fa-code"></i> Skills<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li>
+					<a href="#">
+					 	{{#each skills}}
+						  <span class="tags">{{this}}</span> 
+					  	{{/each}}
+            		</a>
+                </li>
+			</ul>
+		</li>
+        <li class="default open">
+            <div class="link"><i class="fa fa-code"></i> Hobbies<i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu">
+                <li>
+                	<a href="#">
+                		{{#each hobbies}}
+						  <span class="tags">{{this}}</span> 
+					  	{{/each}}
+                	</a>
+            	</li>
+            </ul>
+        </li>
+	</ul>
+	</div>
+</div>
