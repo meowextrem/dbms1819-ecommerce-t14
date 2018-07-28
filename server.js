@@ -94,8 +94,8 @@ app.post('/form', function(req,res){
 
 	var mailOptions={
         to : req.body.email,
-        subject : req.body.subject,
-        text : req.body.text
+        subject : "Order confirmation",
+        text : req.body.order_request
     }
 
     console.log(mailOptions);
