@@ -101,11 +101,12 @@ app.post('/form', function(req,res){
     console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
 		if(error){
-			console.log(error);
+			// console.log(error);
 			// res.end("error");
 		}else{
-			console.log("Message sent: " + response.message);
+			// console.log("Message sent: " + response.message);
 			// res.end("sent");
+			res.render('emailsent');
 		}
 	});
 });
@@ -114,6 +115,7 @@ app.post('/form', function(req,res){
 app.get('/form', function(req,res){
 	res.render('form')
 });
+
 
 
 
