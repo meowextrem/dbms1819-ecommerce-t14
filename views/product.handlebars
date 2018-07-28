@@ -1,28 +1,63 @@
-<h1>{{title}}</h1>
+<div class="banner">
+	<img src="/static/logo.png" style="margin-left: 150pt; margin-top: 14pt">
+	<a href="/" style="color: black; font-size: 17pt; padding-top: 24pt;margin-right: 175pt" class="pull-right">Home</a>
+</div>
 
-{{#each products}}
-	<img id="productImg" class="imgPost" src="/static/{{this.primary_picture}}" >
-	<div style="color: white">
-		<p>{{this.name}}</p>
+<h1 class="text-center">{{title}}</h1>
+
+<div class="container" style="margin-left:250pt; margin-right: 250pt">
+	<div class="product_row_css">
+		{{#each products}}
+			<div class="product_column_css product_container parent_el">
+				{{!-- <div class="hidden ">{{this.name}}</div>
+				<div class="hidden ">{{this.price}}</div>
+				<div class="hidden ">{{this.primary_picture}}</div> --}}
+				<img id="productImg" value="asd" class="imgPost" src="/static/{{this.primary_picture}}">
+				<div class="product_overlay">
+					<form action="/product/id" method="POST">
+						<input type="hidden" name="product_name" value="{{this.name}}">
+						<input type="hidden" name="product_price" value="{{this.price}}">
+						<input type="hidden" name="product_primary_picture" value="{{this.primary_picture}}">
+						<input type="hidden" name="product_description" value="{{this.description}}">
+						<input type="submit" name="" value="{{this.name}}"  style="background-color:transparent; width: 100%; margin: 0px; height: 100%; border: 0px solid;text-align: center; padding: 15pt">
+					</form>
+				</div>
+			</div>
+
+		{{/each}}
 	</div>
-
-{{/each}}
-
-{{!-- <form action="/product/id" method="POST">
-	<input type="text" name="first_name">
-	<input type="submit" name="submit_btn" value="submit">
-</form> --}}
+</div>
 
 <script type="text/javascript">
-	console.log('asd');
-	$(document).ready(function(){
-	    $(".imgPost").click(function(){
-			$.post( "/product/id", { 
-					name: "John", 
-					time: "2pm" 
-				} 
-			);
-	    });
-	});
+	// console.log('asd');
+	// $(document).ready(function(){
+	//     $(".imgPost").click(function(){
+	//     	var name = $(this).parent('.parent_el').children('.product_name').text();
+	//     	var price = $(this).parent('.parent_el').children('.product_price').text();
+	//     	var primary_picture = $(this).parent('.parent_el').children('.product_primary_picture').text();
+	    	
+
+	//     	var data = {
+	//     		name: name,
+	//     		price: price,
+	//     		primary_picture: primary_picture
+	//     	};
+	//     	// JSON.stringify(data)
+	// 		$.ajax({
+	// 			type: "POST",
+	// 			url: "/product/id",
+	// 			timeout: 2000,
+	// 			data: data,
+	// 			success: function(data){
+	// 				// alert("success")
+	// 			},
+	// 			error: function(jqXHR, textStatus, err) {
+	//                 // alert('text status '+textStatus+', err '+err)
+ //            	}
+	// 		});
+
+	//     });
+
+	// });
 
 </script>

@@ -4,6 +4,9 @@ const exphbs = require('express-handlebars');
 const PORT = (process.env.PORT || 3000);
 const { Client } = require('pg');
 var bodyParser = require('body-parser');
+var nodemailer = require("nodemailer");
+const replaceString = require('replace-string');
+var S = require('string');
 
 const client = new Client({
 	database: 'd4a1t26uo61u9i',
@@ -12,6 +15,15 @@ const client = new Client({
 	host: 'ec2-50-16-241-91.compute-1.amazonaws.com',
 	port: 5432,
 	ssl: true
+});
+
+const smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    auth: {
+        user: "dbmsteam14",
+        pass: "1Got1Udont!"
+    }
 });
 
 client.connect().then(function() {
@@ -37,12 +49,13 @@ app.set('view engine', 'handlebars');
 
 app.get('/', function(req, res) {
 	
-	client.query("Select * FROM products", (req, data)=>{
+	client.query("Select * FROM products ORDER BY id ASC", (req, data)=>{
 		console.log(data.rows);
+		
 		res.render('product',{
 			title: 'Products',
 			products: data.rows,
-		})
+		});
 	});
 
 });
@@ -57,11 +70,53 @@ app.get('/', function(req, res) {
 // })
 
 app.post('/product/id', function (req, res) {
- 
-	console.log('body: ' + JSON.stringify(req.body));
+	//var obj = (JSON.stringify(req.body));
+
+	console.log(req.body.product_name);
+	console.log(req.body.product_price);
+	console.log(req.body.product_primary_picture);
+	var product_description = req.body.product_description;
+	res.render('form',{
+		product_name: req.body.product_name,
+		product_price: req.body.product_price,
+		product_primary_picture: req.body.product_primary_picture,
+		product_description : product_description
+	});
+});
+
+app.get('/product/id', function(req,res){
+	res.send("Error. Please go home");
+});
+
+
+app.post('/form', function(req,res){
 	console.log(req.body);
-	res.send(req.body);
-})
+
+	var mailOptions={
+        to : req.body.email,
+        subject : req.body.subject,
+        text : req.body.text
+    }
+
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+		if(error){
+			console.log(error);
+			// res.end("error");
+		}else{
+			console.log("Message sent: " + response.message);
+			// res.end("sent");
+		}
+	});
+});
+
+
+app.get('/form', function(req,res){
+	res.render('form')
+});
+
+
+
 
 
 
