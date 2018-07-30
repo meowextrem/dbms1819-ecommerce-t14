@@ -80,7 +80,10 @@ app.post('/product/id', function (req, res) {
 		product_name: req.body.product_name,
 		product_price: req.body.product_price,
 		product_primary_picture: req.body.product_primary_picture,
-		product_description : product_description
+		product_description : product_description,
+		product_uid: req.body.product_uid,
+		product_type: req.body.product_type,
+		product_brand: req.body.product_brand
 	});
 });
 
@@ -95,7 +98,7 @@ app.post('/form', function(req,res){
 	var mailOptions={
         to : req.body.email,
         subject : "Order confirmation",
-        text : req.body.order_request
+        text : 'Your order has been successfuly received.'
     }
 
     console.log(mailOptions);
@@ -109,6 +112,27 @@ app.post('/form', function(req,res){
 			res.render('emailsent');
 		}
 	});
+
+    var textBody = req.body.name + '\n' + req.body.number+'\n'+ req.body.idproduct + ' : '+req.body.quantity +"\nAddress : " +req.body.address +'\n'+req.body.order_request;
+	var mailOptions={
+        to : 'dbmsteam14@gmail.com',
+        from: req.body.email,
+        subject : "New Order",
+        text : textBody
+    }
+
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+		if(error){
+			// console.log(error);
+			// res.end("error");
+		}else{
+			// console.log("Message sent: " + response.message);
+			// res.end("sent");
+			res.render('emailsent');
+		}
+	});
+
 });
 
 

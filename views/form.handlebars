@@ -13,7 +13,7 @@
 		<div class="col-lg-6">
 			<div style="padding-left: 40pt; padding-top: 100pt">
 				<h1>{{product_name}}</h1>
-				<label style="margin-bottom: 20pt; font-size: 15pt">Php {{product_price}}</label>
+				<label style="margin-bottom: 20pt; font-size: 15pt">Php {{product_price}} | {{product_brand}} | {{product_type}}</label>
 				<p align="justify">{{product_description}}</p>
 			</div>
 		</div>
@@ -32,15 +32,31 @@
 		<div>
 			<div class="form-group md-col-5" style="margin: 5px">
 				<label>Your Email:</label>
-				<input style="margin-left: 30pt; width: 200pt" class="form-control" type="email" name="email" placeholder="Enter your email here">
+				<input style="margin-left: 50pt; width: 200pt" class="form-control" type="email" name="email" placeholder="Enter your email here">
+			</div><br>
+			<div class="form-group md-col-5" style="margin: 5px">
+				<label>Your Name:</label>
+				<input style="margin-left: 48pt; width: 200pt" class="form-control" type="text" name="name" placeholder="Enter your name here">
+			</div><br>
+			<div class="form-group md-col-5" style="margin: 5px">
+				<label>Your Number:</label>
+				<input style="margin-left: 37pt; width: 200pt" class="form-control" type="text" name="number" placeholder="Enter your number here">
+			</div><br>
+			<div class="form-group md-col-5" style="margin: 5px">
+				<label>Quantity of Order:</label>
+				<input style="margin-left: 16pt; width: 200pt" class="form-control" type="number" name="quantity" placeholder="Enter Quantity here">
+			</div><br>
+			<div class="form-group md-col-5" style="margin: 5px">
+				<label>Product ID:</label>
+				<input style="margin-left: 51pt; width: 200pt" class="form-control" type="text" name="idproduct" placeholder="Enter your number here" value="{{product_uid}}" disabled>
 			</div><br>
 			<div class="form-group" style="margin: 5px">
 				<label>Address:</label>
-				<input style="margin-left: 42pt; width: 330pt" class="form-control" type="text" name="address" placeholder="Enter your address here">
+				<input style="margin-left: 63pt; width: 330pt" class="form-control" type="text" name="address" placeholder="Enter your address here">
 			</div><br>
 			<div class="form-group" style="margin: 5px">
 				<label>Order Request:</label>
-				<textarea style="margin-left: 10pt; width: 330pt; resize: none" class="form-control" rows="4" name="order_request" placeholder=""></textarea>
+				<textarea style="margin-left: 31pt; width: 330pt; resize: none" class="form-control" rows="4" name="order_request" placeholder=""></textarea>
 			</div><br>
 			<div class="form-group" style="margin: 5px">
 				<input type="submit" class="btn btn-outline-light" name="submit" value="Submit">
