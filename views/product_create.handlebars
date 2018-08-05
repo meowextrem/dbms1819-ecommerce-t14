@@ -1,40 +1,60 @@
-<div class="container text-center">
+<div class="container text-center col-md-10 col-md-offset-1" style="margin: 0 auto">
 
-	<form action="/product/create" enctype="multipart/form-data"  method="POST">
-		<div>
-			<label>Product Name</label>
-			<input type="text" name="name" required><br>
-
-			<label>Product Price</label>
-			<input type="number" name="price" min="0" required><br>
-
-			<label>Product Description</label>
-			<textarea name="description"></textarea><br>
-
-			<label>Warranty (in years)</label>
-			<input type="number" name="warranty"><br>
-
-			<label>Brand</label>
-			<select required name="brand" >
-				<option value=""></option>
-				{{#each brands}}
-					<option value="{{this.id}}">{{this.name}}</option>
-				{{/each}}
-			</select><br>
-
-			<label>Category</label>
-			<select required name="category" >
-  				<option value=""></option>
-				{{#each categories}}
-					<option value="{{this.id}}">{{this.name}}</option>
-				{{/each}}
-			</select><br>
-
-			<label>Picture</label>
-			<input type="file" name="primary_picture" style="margin: 0 auto" required>
-
-			<input type="submit" name="" value="add">
+	<form action="/product/create" enctype="multipart/form-data"  method="POST" class="form-horizontal " >
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Product Name</label>
+			<div class="col-md-5">
+				<input type="text" name="name" class="form-control" required>
+			</div>
 		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Product Price</label>
+			<div class="col-md-5">
+				<input type="number" name="price" min="0" class="form-control" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Product Description</label>
+			<div class="col-md-5">
+				<textarea name="description" class="form-control"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Warranty (in years)</label>
+			<div class="col-md-5">
+				<input type="number" name="warranty" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Brand</label>
+			<div class="col-md-5">
+				<select required name="brand" class="form-control">
+					<option value=""></option>
+					{{#each brands}}
+						<option value="{{this.id}}">{{this.name}}</option>
+					{{/each}}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Category</label>
+			<div class="col-md-5">
+				<select required name="category" class="form-control">
+	  				<option value=""></option>
+					{{#each categories}}
+						<option value="{{this.id}}">{{this.name}}</option>
+					{{/each}}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Picture</label>
+			<div class="col-md-5">
+				<input type="file" name="primary_picture" style="margin: 0 auto" class="form-control" required>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-default">Add</button>
+		
 	</form>
 
 </div>	

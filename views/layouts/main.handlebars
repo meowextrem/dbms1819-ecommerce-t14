@@ -86,7 +86,7 @@
 	}
 
 
-	/*css for brand_create*/
+	css for brand_create
 	#brandPanel{
 		width: 500pt;
 		margin-top: 100pt;
@@ -136,12 +136,42 @@
 	  -webkit-appearance: none; 
 	  margin: 0; 
 	}
+
+
+	/*css for footer*/
+	footer{
+		background: black;
+		height: 100pt;
+		
+	}
+	#foot{
+		color:white;
+	}
+	.fa{
+		color: white;
+	}
+ 	h5{
+	padding-left: 10px;
+    border-left: 3px solid #FFFFFF;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+	}
+
+	ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+	}		
+	/*end of css for footer*/
 	</style>
 </head>
 <body>
 <div class="banner">
 	<a href="/"><img src="/static/logo.png" style="margin-left: 100pt; margin-top: 14pt"></a>
-	<a href="/" style="color: black; font-size: 17pt; padding-top: 24pt;margin-right: 135pt" class="pull-right">Home</a>
+	<a href="/" style="color: #808080; font-size: 17pt; padding-top: 24pt;margin-right: 135pt" class="pull-right"><span class="glyphicon glyphicon-home"></span></a>
 </div>
     {{{body}}}
 
@@ -149,16 +179,26 @@
 
 
 <!-- Footer -->
-{{!-- <footer class="qweqwewq" > --}}
-
-
-    <!-- Copyright -->
-    {{!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: --}}
-      {{!-- <a href="https://mdbootstrap.com/bootstrap-tutorial/"> facebook.com/aiverkeith facebook.com/vistasweeney</a> --}}
-    {{!-- </div> --}}
-    <!-- Copyright -->
-
-{{!-- </footer> --}}
+{{!-- <footer>
+	<div class="col-xs-12 col-md-4 col-lg-4" id="foot">
+		<h5>Quick links</h5>
+			<ul class="list-unstyled links">
+				<li><a href="#"><i class="fa fa-angle-double-right"></i>Home</a></li>
+				<li><a href="#"><i class="fa fa-angle-double-right"></i>Products</a></li>
+	</div>
+	<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+					<ul class="list-unstyled list-inline social text-center">
+						<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+				</div>
+				</hr>
+			</div>	
+</footer> --}}
 <!-- Footer -->
 
 
