@@ -1,26 +1,30 @@
 <div class="container text-center">
-	<table>
-		<thead>
-			<tr>
-				<td>
-					Brand Name
-				</td>
-				<td>
-					Description
-				</td>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each brands}}
+	<br>
+
+	<div class="container col-xs-12 ">
+		<table class="table table-hover table-striped">
+			<thead>
 				<tr>
-					<td>
-						{{this.name}}
-					</td>
-					<td>
-						{{this.description}}
-					</td>
+					<th class="text-center" width="12%">
+						<label>Brand Name</label>
+					</th>
+					<th class="text-center">
+						<label>Description</label>
+					</th>
 				</tr>
-			{{/each}}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{{#each brands}}
+					<tr>
+						<td>
+							<label>{{this.name}}</label>
+						</td>
+						<td>
+							{{this.description}}
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
 </div>
