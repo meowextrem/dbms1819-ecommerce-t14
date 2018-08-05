@@ -1,0 +1,26 @@
+<div class="container text-center">
+	<table>
+		<thead>
+			<tr>
+				<td>
+					Brand Name
+				</td>
+				<td>
+					Description
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each brands}}
+				<tr>
+					<td>
+						{{this.name}}
+					</td>
+					<td>
+						{{this.description}}
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>

@@ -121,6 +121,24 @@ app.get('/brand/create', function(req,res){
 });
 
 
+app.get('/brands',function(req,res){
+	client.query("SELECT * FROM brands;", (req, data)=>{
+		console.log(data.rows);
+		
+		res.render('brand_lists',{
+			brands: data.rows,
+		});
+		
+		
+
+	});
+});
+
+app.get('/category/create', function(req,res){
+	res.render('category_create');
+});
+
+
 app.post('/product/id', function (req, res) {
 	//var obj = (JSON.stringify(req.body));
 
@@ -140,10 +158,25 @@ app.post('/product/id', function (req, res) {
 });
 
 app.post('/brand/create', function(req,res){
-	console.log(req.body.brand_name);
-	console.log(req.body.brand_description);
+	brand_name = req.body.brand_name;
+	brand_description = req.body.brand_description;
+
+	var query = 'INSERT INTO brands (name,description) VALUES($1,$2);';
+	var values = new Array();
+	values.push(brand_name);
+	values.push(brand_description);
+	console.log(values);
+	client.query(query,values, (req, data)=>{
+		res.redirect('/brands');
+	});
+
 });
 
+app.post('/category/create', function(req,res){
+	category_name = req.body.category_name;
+
+	var query = 'INSERT '
+});
 
 
 app.listen(PORT, function() {
