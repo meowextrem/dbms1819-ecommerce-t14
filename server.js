@@ -129,13 +129,27 @@ app.get('/brands',function(req,res){
 			brands: data.rows,
 		});
 		
-		
-
 	});
 });
 
 app.get('/category/create', function(req,res){
 	res.render('category_create');
+});
+
+app.get('/categories',function(req,res){
+	client.query("SELECT * FROM product_category;", (req, data)=>{
+		console.log(data.rows);
+		
+		res.render('categories',{
+			categories: data.rows,
+		});
+		
+	});
+});
+
+
+app.get('/product/create', function(req,res){
+	res.render('product_create');
 });
 
 
@@ -175,7 +189,14 @@ app.post('/brand/create', function(req,res){
 app.post('/category/create', function(req,res){
 	category_name = req.body.category_name;
 
-	var query = 'INSERT '
+	var query = 'INSERT INTO product_category (name) VALUES ($1);';
+	var values = new Array();
+	values.push(category_name);
+	console.log(values);
+	client.query(query,values, (req, data)=>{
+		res.redirect('/categories');
+	});
+
 });
 
 
