@@ -1,65 +1,59 @@
-<div class="container text-center col-md-10 col-md-offset-1" style="margin: 0 auto">
-
+<h2 style="margin: 0 auto;margin-top: 50pt; margin-bottom: 35pt; padding-left: 0pt" class="text-center">Add Product</h2>
+<div class="container " style="max-width: 650pt;  padding-left: 150pt;">
 	<form action="/product/create" enctype="multipart/form-data"  method="POST" class="form-horizontal " >
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Product Name</label>
-			<div class="col-md-5">
-				<input type="text" name="name" class="form-control" required>
-			</div>
+		<div class="form-inline" style="margin: 10pt">
+			<label style="margin-right: 40pt">Product Name</label>
+			<input type="text" name="name" class="form-control clear_product_input" required style="width: 220pt">
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Product Price</label>
-			<div class="col-md-5">
-				<input type="number" name="price" min="0" class="form-control" required>
-			</div>
+		<div class="form-inline" style="margin: 10pt">
+			<label style="margin-right: 45pt">Product Price</label>
+			<input type="number" name="price" min="0" class="form-control clear_product_input" required style="width: 220pt">
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Product Description</label>
-			<div class="col-md-5">
-				<textarea name="description" class="form-control"></textarea>
-			</div>
+		<div class="form-inline" style="margin: 10pt">
+			<label style="margin-right: 13pt">Product Description</label>
+			<textarea name="description" class="form-control clear_product_input" style="width: 220pt"></textarea>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Warranty (in years)</label>
-			<div class="col-md-5">
-				<input type="number" name="warranty" class="form-control">
-			</div>
+		<div class="form-inline" style="margin: 10pt">
+			<label style="margin-right: 18pt">Warranty (in years)</label>
+			<input type="number" name="warranty" class="form-control clear_product_input" style="width: 220pt">
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Brand</label>
-			<div class="col-md-5">
-				<select required name="brand" class="form-control">
-					<option value=""></option>
-					{{#each brands}}
-						<option value="{{this.id}}">{{this.name}}</option>
-					{{/each}}
-				</select>
-			</div>
+		<div class="form-inline" style="margin: 10pt">
+			<label style="margin-right: 81pt">Brand</label>
+			<select required name="brand" class="form-control clear_product_input" style="width: 220pt">
+				<option value=""></option>
+				{{#each brands}}
+					<option value="{{this.id}}">{{this.name}}</option>
+				{{/each}}
+			</select>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Category</label>
-			<div class="col-md-5">
-				<select required name="category" class="form-control">
-	  				<option value=""></option>
-					{{#each categories}}
-						<option value="{{this.id}}">{{this.name}}</option>
-					{{/each}}
-				</select>
-			</div>
+		<div class="form-inline" style="margin: 10pt">
+			<label style="margin-right: 67pt">Category</label>
+			<select required name="category" class="form-control clear_product_input" style="width: 220pt">
+  				<option value=""></option>
+				{{#each categories}}
+					<option value="{{this.id}}">{{this.name}}</option>
+				{{/each}}
+			</select>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Picture</label>
-			<div class="col-md-5">
-				<input type="file" name="primary_picture" style="margin: 0 auto" class="form-control" required>
-			</div>
+
+		<div class="form-inline" style="margin: 10pt">
+			<label style="margin-right: 76pt">Picture</label>
+			<input type="file" name="primary_picture" style="margin: 0 auto" class="form-control clear_product_input" required style="width: 220pt">
 		</div>
-		<button type="submit" class="btn btn-default">Add</button>
+
 		
-	</form>
+	
 
 </div>	
 
+<div class="container text-center" style="width: 375pt; ">
+	<button type="submit" class="btn btn-default" style="display: inline; margin-left: 255pt">Add</button>
+	<button type="button" id="clearr" class="btn btn-default" style="display: inline; ">Clear</button>
+</div>
+</form>
 <script type="text/javascript">
-	
+	$('#clearr').click(function(){
+    	$('.clear_product_input').val('');
+	});
 
 </script>
