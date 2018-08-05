@@ -103,9 +103,7 @@ app.get('/', function(req, res) {
 
 
 
-app.get('/product/id', function(req,res){
-	res.redirect('/');
-});
+
 
 app.post('/form', function(req,res){
 	console.log(req.body);
@@ -201,13 +199,102 @@ app.get('/product/create', function(req,res){
 
 });
 
+app.get('/product/update/:id',function(req,res){
+	// res.render('product_update');
+
+	client.query('SELECT * FROM products WHERE id = $1',[req.params.id],(req,data)=>{
+		// console.log(data.rows);
+		client.query('SELECT * FROM brands',(req,data_brand)=>{
+		//client.query('SELECT * FROM brands WHERE id = $1',[data.rows[0].brand_id],(req,data_brand)=>{
+			client.query('SELECT * FROM product_category',(req,data_category)=>{
+			//client.query('SELECT * FROM product_category WHERE id = $1',[data.rows[0].category_id],(req,data_category)=>{
+				res.render('product_update',{
+					product_id: data.rows[0].id,
+					product_name: data.rows[0].name,
+					product_price: data.rows[0].price,
+					product_description: data.rows[0].description,
+					product_warranty: data.rows[0].warranty,
+					brand: data.rows[0].brand_id,
+					category: data.rows[0].category_id,
+					brands: data_brand.rows,
+					categories: data_category.rows
+				});
+			})
+		})
+	})
+});
+
+app.post('/product/values', function(req,res){
+	var query = 'UPDATE products SET name = ($1), price = ($2), description = ($3), warranty = ($4) , brand_id = ($5), category_id = ($6) WHERE id = ($7);';
+	var values = new Array();
+	values.push(req.body.name);
+	values.push(req.body.price);
+	values.push(req.body.description);
+	values.push(req.body.warranty);
+	values.push(req.body.brand);
+	values.push(req.body.category);
+	values.push(req.body.product_id);
+	client.query(query,values,(req,data)=>{
+		res.redirect('/');
+	});
+
+});
+
 
 app.post('/product/update', function(req,res){
 	id = req.body.product_id;
 
-	res.redirect('/product/update/id',{
-		id: id
+	res.redirect('/product/update/'+id);
+});
+
+app.get('/product/:id', function(req,res){
+
+	var query = "SELECT * FROM products WHERE id = $1";
+	var values = new Array();
+	values.push(req.params.id);
+
+
+	client.query(query,values, (req, data)=>{
+		var query2 = "SELECT * FROM brands WHERE id = $1";
+		var values2 = new Array();
+		values2.push(data.rows[0].brand_id);
+		client.query(query2,values2,(req,data_brand)=>{
+			if (req) console.log(req);
+			brand = data_brand.rows[0].name;
+
+			var query3 = "SELECT * FROM product_category WHERE id = $1";
+			var values3 = new Array();
+			values3.push(data.rows[0].category_id);
+			client.query(query3,values3,(req,data_category)=>{
+				category = data_category.rows[0].name;
+
+				res.render('form',{
+				product_id: data.rows[0].id,
+				product_name: data.rows[0].name,
+				product_price: data.rows[0].price,
+				product_primary_picture: data.rows[0].primary_picture,
+				product_description : data.rows[0].description,
+				product_warranty: data.rows[0].warranty,
+				product_brand: brand,
+				product_category: category
+			});
+
+			
+		});
 	});
+
+		
+	});
+
+	// res.render('form',{
+	// 	product_name: req.body.product_name,
+	// 	product_price: req.body.product_price,
+	// 	product_primary_picture: req.body.product_primary_picture,
+	// 	product_description : req.body.product_description,
+	// 	product_id: req.body.productuid,
+	// 	product_type: req.body.product_type,
+	// 	product_brand: req.body.product_brand
+	// })
 });
 
 
@@ -217,16 +304,8 @@ app.post('/product/id', function (req, res) {
 	console.log(req.body.product_name);
 	console.log(req.body.product_price);
 	console.log(req.body.product_primary_picture);
-	var product_description = req.body.product_description;
-	res.render('form',{
-		product_name: req.body.product_name,
-		product_price: req.body.product_price,
-		product_primary_picture: req.body.product_primary_picture,
-		product_description : product_description,
-		product_id: req.body.productuid,
-		product_type: req.body.product_type,
-		product_brand: req.body.product_brand
-	});
+	
+	res.redirect('/product/'+req.body.product_id);
 });
 
 app.post('/brand/create', function(req,res){

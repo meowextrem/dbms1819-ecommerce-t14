@@ -7,20 +7,24 @@
 	    		<div class="panel-body" >
 	    			<div class="form-group">
 						<label>Brand Name</label>
-						<input type="text" name="brand_name" placeholder="brand name" class="form-control">
+						<input type="text" name="brand_name" id="brand_name" placeholder="brand name" class="form-control">
 						<label> &nbsp &nbsp Brand Description</label>
 						{{!-- <input type="textbox" name="brand_description" placeholder="brand description"> --}}
-						<textarea name="brand_description" class="form-control"></textarea>
+						<textarea name="brand_description" id="brand_description" class="form-control"></textarea>
 					{{!-- 	<input type="submit" name="" value="Add" class="form-control"> --}}
 					<br>
 					<br>
 					<button type="submit" class="btn btn-default">Add</button>
-						<button type="submit" class="btn btn-default">Clear</button>
+						<button type="button" class="btn btn-default" id="clearr">Clear</button>
 					</div>
 	    		</div>
 	  		</div>
 	</form>
 
-
-
 </div>
+<script type="text/javascript">
+	$('#clearr').click(function(){
+    	$('#brand_name').val('');
+    	$('#brand_description').val('');
+	});
+</script>
