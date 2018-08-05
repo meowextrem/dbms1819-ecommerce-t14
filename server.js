@@ -6,7 +6,6 @@ const { Client } = require('pg');
 var bodyParser = require('body-parser');
 var nodemailer = require("nodemailer");
 const replaceString = require('replace-string');
-var S = require('string');
 var _ = require('lodash');
 var multer  = require('multer')
 var storage = multer.diskStorage({
@@ -203,6 +202,15 @@ app.get('/product/create', function(req,res){
 });
 
 
+app.post('/product/update', function(req,res){
+	id = req.body.product_id;
+
+	res.redirect('/product/update/id',{
+		id: id
+	});
+});
+
+
 app.post('/product/id', function (req, res) {
 	//var obj = (JSON.stringify(req.body));
 
@@ -215,7 +223,7 @@ app.post('/product/id', function (req, res) {
 		product_price: req.body.product_price,
 		product_primary_picture: req.body.product_primary_picture,
 		product_description : product_description,
-		product_uid: req.body.product_uid,
+		product_id: req.body.productuid,
 		product_type: req.body.product_type,
 		product_brand: req.body.product_brand
 	});

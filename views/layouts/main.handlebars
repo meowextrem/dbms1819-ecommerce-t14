@@ -136,6 +136,34 @@
 	  -webkit-appearance: none; 
 	  margin: 0; 
 	}
+
+	html {
+	  height: 100%;
+	  box-sizing: border-box;
+	}
+
+	*,
+	*:before,
+	*:after {
+	  box-sizing: inherit;
+	}
+
+	body {
+	  position: relative;
+	  margin: 0;
+	  padding-bottom: 6rem;
+	  min-height: 100%;
+	}
+	.footer {
+	  position: absolute;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  padding: 1rem;
+	  background-color: #efefef;
+	  text-align: center;
+	}
+
 	</style>
 </head>
 <body>
@@ -149,15 +177,14 @@
 
 
 <!-- Footer -->
-{{!-- <footer class="qweqwewq" > --}}
-
-
+{{!-- <footer id="qqq"> --}}
+<div class="footer">
     <!-- Copyright -->
-    {{!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: --}}
-      {{!-- <a href="https://mdbootstrap.com/bootstrap-tutorial/"> facebook.com/aiverkeith facebook.com/vistasweeney</a> --}}
-    {{!-- </div> --}}
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://mdbootstrap.com/bootstrap-tutorial/"> facebook.com/aiverkeith facebook.com/vistasweeney</a>
+    </div>
     <!-- Copyright -->
-
+</div>
 {{!-- </footer> --}}
 <!-- Footer -->
 
@@ -192,5 +219,9 @@
 	var accordion = new Accordion($('#accordion'), false);
 });
 
+$( document ).ready(function() {
+   	document.getElementByID('qqq').style.position = 'absolute';
+   	document.getElementByID('qqq').style.bottom = '0';
+});
 </script>
 </html>

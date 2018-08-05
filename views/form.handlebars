@@ -13,6 +13,10 @@
 			<div style="padding-left: 40pt; padding-top: 100pt">
 				<h1>{{product_name}}</h1>
 				<label style="margin-bottom: 20pt; font-size: 15pt">Php {{product_price}} | {{product_brand}} | {{product_type}}</label>
+				<form action="/product/update" method="POST">
+					<input type="hidden" name="product_id" value="{{product_id}}">
+					<input class="btn btn-sm" type="submit" name="" value="Update" style="margin-bottom: 2em">
+				</form>
 				<p align="justify">{{product_description}}</p>
 			</div>
 		</div>
