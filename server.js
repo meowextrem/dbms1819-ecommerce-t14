@@ -69,6 +69,58 @@ app.get('/', function(req, res) {
 //    res.end(JSON.stringify(response));
 // })
 
+
+
+app.get('/product/id', function(req,res){
+	res.redirect('/');
+});
+
+app.post('/form', function(req,res){
+	console.log(req.body);
+
+	var mailOptions={
+        to : req.body.email,
+        subject : "Order confirmation",
+        text : 'Your order has been successfuly received.'
+    }
+
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+		if(error){
+		}else{
+			res.render('emailsent');
+		}
+	});
+
+    var textBody = req.body.name + '\n' + req.body.number+'\n'+ req.body.idproduct + ' : '+req.body.quantity +"\nAddress : " +req.body.address +'\n'+req.body.order_request;
+	var mailOptions={
+        to : 'dbmsteam14@gmail.com',
+        from: req.body.email,
+        subject : "New Order",
+        text : textBody
+    }
+
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+		if(error){
+		}else{
+			res.render('emailsent');
+		}
+	});
+
+});
+
+
+app.get('/form', function(req,res){
+	res.render('form')
+});
+
+
+app.get('/brand/create', function(req,res){
+	res.render('brand_create');
+});
+
+
 app.post('/product/id', function (req, res) {
 	//var obj = (JSON.stringify(req.body));
 
@@ -87,62 +139,10 @@ app.post('/product/id', function (req, res) {
 	});
 });
 
-app.get('/product/id', function(req,res){
-	res.send("Error. Please go home");
+app.post('/brand/create', function(req,res){
+	console.log(req.body.brand_name);
+	console.log(req.body.brand_description);
 });
-
-
-app.post('/form', function(req,res){
-	console.log(req.body);
-
-	var mailOptions={
-        to : req.body.email,
-        subject : "Order confirmation",
-        text : 'Your order has been successfuly received.'
-    }
-
-    console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function(error, response){
-		if(error){
-			// console.log(error);
-			// res.end("error");
-		}else{
-			// console.log("Message sent: " + response.message);
-			// res.end("sent");
-			res.render('emailsent');
-		}
-	});
-
-    var textBody = req.body.name + '\n' + req.body.number+'\n'+ req.body.idproduct + ' : '+req.body.quantity +"\nAddress : " +req.body.address +'\n'+req.body.order_request;
-	var mailOptions={
-        to : 'dbmsteam14@gmail.com',
-        from: req.body.email,
-        subject : "New Order",
-        text : textBody
-    }
-
-    console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function(error, response){
-		if(error){
-			// console.log(error);
-			// res.end("error");
-		}else{
-			// console.log("Message sent: " + response.message);
-			// res.end("sent");
-			res.render('emailsent');
-		}
-	});
-
-});
-
-
-app.get('/form', function(req,res){
-	res.render('form')
-});
-
-
-
-
 
 
 
