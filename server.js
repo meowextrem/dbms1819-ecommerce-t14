@@ -7,6 +7,36 @@ var bodyParser = require('body-parser');
 var nodemailer = require("nodemailer");
 const replaceString = require('replace-string');
 var S = require('string');
+var _ = require('lodash');
+var multer  = require('multer')
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'pictures')
+  },
+  filename: function (req, file, cb) {
+    console.log(file);
+    const ext = file.mimetype.split('/')[1];
+    cb(null, file.fieldname + '-' + Date.now() + '.'+ext);
+  }
+})
+
+var fileFilter = function(req, file, cb) {
+// supported image file mimetypes
+var allowedMimes = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
+
+if (_.includes(allowedMimes, file.mimetype)) {
+// allow supported image files
+cb(null, true);
+} else {
+// throw error for invalid files
+cb(new Error('Invalid file type. Only jpg, png and gif image files are allowed.'));
+}
+};
+
+ 
+ 
+var upload = multer({ storage: storage,fileFilter: fileFilter })
+
 
 const client = new Client({
 	database: 'd4a1t26uo61u9i',
@@ -46,6 +76,9 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 // tell express to use handebars XD
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+
+
+
 
 app.get('/', function(req, res) {
 	
@@ -149,7 +182,24 @@ app.get('/categories',function(req,res){
 
 
 app.get('/product/create', function(req,res){
-	res.render('product_create');
+	var brands = new Array();
+	var categories = new Array();
+	client.query("SELECT * FROM brands;", (req, data1)=>{
+		brands = data1.rows;
+	});
+
+	client.query("SELECT * FROM product_category;", (req, data2)=>{
+		categories = data2.rows;
+
+		console.log(brands);
+		console.log(categories);
+		res.render('product_create',{
+			brands: brands,
+			categories: categories
+		});
+	});
+
+
 });
 
 
@@ -197,6 +247,32 @@ app.post('/category/create', function(req,res){
 		res.redirect('/categories');
 	});
 
+});
+
+
+app.post('/product/create', upload.single('primary_picture'), function(req,res){
+	name = req.body.name;
+	price = req.body.price;
+	description = req.body.description;
+	warranty = req.body.warranty;
+	brand = req.body.brand;
+	category = req.body.category;
+	primary_picture = req.file.filename;
+
+	var query = 'INSERT INTO products (name,price,description,warranty,brand_id,category_id,primary_picture) VALUES ($1,$2,$3,$4,$5,$6,$7);';
+	var values = new Array();
+	values.push(name);
+	values.push(price);
+	values.push(description);
+	values.push(warranty);
+	values.push(brand);
+	values.push(category);
+	values.push(primary_picture);
+
+	client.query(query,values,(req,data)=>{
+
+	});
+   	res.redirect('/');
 });
 
 

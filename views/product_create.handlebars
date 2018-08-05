@@ -1,17 +1,45 @@
 <div class="container text-center">
 
-	<form action="/product/create" method="POST">
+	<form action="/product/create" enctype="multipart/form-data"  method="POST">
 		<div>
 			<label>Product Name</label>
-			<input type="text" name="name"><br>
+			<input type="text" name="name" required><br>
 
 			<label>Product Price</label>
-			<input type="number" name="price" min="0" step="disabled"><br>
+			<input type="number" name="price" min="0" required><br>
 
 			<label>Product Description</label>
 			<textarea name="description"></textarea><br>
 
+			<label>Warranty (in years)</label>
+			<input type="number" name="warranty"><br>
+
+			<label>Brand</label>
+			<select required name="brand" >
+				<option value=""></option>
+				{{#each brands}}
+					<option value="{{this.id}}">{{this.name}}</option>
+				{{/each}}
+			</select><br>
+
+			<label>Category</label>
+			<select required name="category" >
+  				<option value=""></option>
+				{{#each categories}}
+					<option value="{{this.id}}">{{this.name}}</option>
+				{{/each}}
+			</select><br>
+
+			<label>Picture</label>
+			<input type="file" name="primary_picture" style="margin: 0 auto" required>
+
+			<input type="submit" name="" value="add">
 		</div>
 	</form>
 
-</div>
+</div>	
+
+<script type="text/javascript">
+	
+
+</script>
