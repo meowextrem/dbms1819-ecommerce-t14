@@ -9,7 +9,7 @@
 				{{!-- <div class="hidden ">{{this.name}}</div>
 				<div class="hidden ">{{this.price}}</div>
 				<div class="hidden ">{{this.primary_picture}}</div> --}}
-				<img id="productImg" value="asd" class="imgPost" src="/static/{{this.primary_picture}}">
+				<img id="productImg" value="asd" class="imgPost" src="{{this.primary_picture}}" style="max-width: 275px">
 				<div class="product_overlay">
 					<form action="/product/id" method="POST">
 						<input type="hidden" name="product_id" value="{{this.id}}">
@@ -20,7 +20,7 @@
 						<input type="hidden" name="product_primary_picture" value="{{this.primary_picture}}">
 						<input type="hidden" name="product_description" value="{{this.description}}">
 						{{!-- <input type="submit" name="" value="{{this.name}} {{this.price}}"  style="background-color:transparent; width: 100%; margin: 0px; height: 100%; border: 0px solid;text-align: center; padding: 15pt"> --}}
-						<button type="submit" name="" style="background-color:transparent; width: 100%; margin: 0px; height: 100%; border: 0px solid;text-align: center; padding: 7pt">{{this.name}}</br>Php {{this.price}}</button>
+						<button type="submit" name="" style="background-color:transparent; width: 100%; margin: 0px; height: 100%; border: 0px solid;text-align: center; padding-top: 5pt">{{this.name}}</br>Php {{this.price}}</button>
 					</form>
 				</div>
 			</div>

@@ -8,6 +8,7 @@ var nodemailer = require("nodemailer");
 const replaceString = require('replace-string');
 var _ = require('lodash');
 var multer  = require('multer')
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'pictures')
@@ -201,7 +202,7 @@ app.get('/product/create', function(req,res){
 
 app.get('/product/update/:id',function(req,res){
 	// res.render('product_update');
-
+			
 	client.query('SELECT * FROM products WHERE id = $1',[req.params.id],(req,data)=>{
 		// console.log(data.rows);
 		client.query('SELECT * FROM brands',(req,data_brand)=>{
@@ -338,6 +339,7 @@ app.post('/category/create', function(req,res){
 
 
 app.post('/product/create', upload.single('primary_picture'), function(req,res){
+// app.post('/product/create', function(req,res){
 	name = req.body.name;
 	price = req.body.price;
 	description = req.body.description;
@@ -345,6 +347,45 @@ app.post('/product/create', upload.single('primary_picture'), function(req,res){
 	brand = req.body.brand;
 	category = req.body.category;
 	primary_picture = req.file.filename;
+
+
+
+
+	// const upload = multer({ storage }).single('primary_picture')
+ // 	upload(req, res, function(err) {
+ //    if (err) {
+ //      return res.send(err)
+ //    };
+ //    console.log('file uploaded to server')
+ //    console.log(req.file)
+
+	// SEND FILE TO CLOUDINARY
+    const cloudinary = require('cloudinary').v2
+    cloudinary.config({
+      cloud_name: 'dbms1819-ecommerce-t14',
+      api_key: '193374582931432',
+      api_secret: 'RcmaNQ88-PTjtZbJC7rnDyf7fKs'
+    })
+
+
+	const path = req.file.path
+    const uniqueFilename = primary_picture
+
+	cloudinary.uploader.upload(
+      path,
+      { public_id: `static/${uniqueFilename}` }, // directory and tags are optional
+      function(err, image) {
+        if (err) return res.send(err)
+        console.log('file uploaded to Cloudinary')
+        // remove file from server
+        const fs = require('fs')
+        fs.unlinkSync(path)
+        // return image details
+        // res.json(image)
+      }
+    )
+
+
 
 	var query = 'INSERT INTO products (name,price,description,warranty,brand_id,category_id,primary_picture) VALUES ($1,$2,$3,$4,$5,$6,$7);';
 	var values = new Array();
@@ -357,9 +398,8 @@ app.post('/product/create', upload.single('primary_picture'), function(req,res){
 	values.push(primary_picture);
 
 	client.query(query,values,(req,data)=>{
-
+   		res.redirect('/');
 	});
-   	res.redirect('/');
 });
 
 
