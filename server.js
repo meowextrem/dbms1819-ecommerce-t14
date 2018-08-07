@@ -202,7 +202,7 @@ app.get('/product/create', function(req,res){
 
 app.get('/product/update/:id',function(req,res){
 	// res.render('product_update');
-			
+
 	client.query('SELECT * FROM products WHERE id = $1',[req.params.id],(req,data)=>{
 		// console.log(data.rows);
 		client.query('SELECT * FROM brands',(req,data_brand)=>{
@@ -370,7 +370,7 @@ app.post('/product/create', upload.single('primary_picture'), function(req,res){
 
 	const path = req.file.path
     const uniqueFilename = primary_picture
-
+    var picture = "";
 	cloudinary.uploader.upload(
       path,
       { public_id: `static/${uniqueFilename}` }, // directory and tags are optional
@@ -382,24 +382,44 @@ app.post('/product/create', upload.single('primary_picture'), function(req,res){
         fs.unlinkSync(path)
         // return image details
         // res.json(image)
+        console.log(image.url);
+        console.log(image);
+        picture = image.secure_url;
+        console.log(picture);
+
+
+
+        var query = 'INSERT INTO products (name,price,description,warranty,brand_id,category_id,primary_picture) VALUES ($1,$2,$3,$4,$5,$6,$7);';
+		var values = new Array();
+		values.push(name);
+		values.push(price);
+		values.push(description);
+		values.push(warranty);
+		values.push(brand);
+		values.push(category);
+		values.push(picture);
+
+		client.query(query,values,(req,data)=>{
+	   		res.redirect('/');
+		});
       }
     )
 
 
 
-	var query = 'INSERT INTO products (name,price,description,warranty,brand_id,category_id,primary_picture) VALUES ($1,$2,$3,$4,$5,$6,$7);';
-	var values = new Array();
-	values.push(name);
-	values.push(price);
-	values.push(description);
-	values.push(warranty);
-	values.push(brand);
-	values.push(category);
-	values.push(primary_picture);
+	// var query = 'INSERT INTO products (name,price,description,warranty,brand_id,category_id,primary_picture) VALUES ($1,$2,$3,$4,$5,$6,$7);';
+	// var values = new Array();
+	// values.push(name);
+	// values.push(price);
+	// values.push(description);
+	// values.push(warranty);
+	// values.push(brand);
+	// values.push(category);
+	// values.push(picture);
 
-	client.query(query,values,(req,data)=>{
-   		res.redirect('/');
-	});
+	// client.query(query,values,(req,data)=>{
+ //   		res.redirect('/');
+	// });
 });
 
 
