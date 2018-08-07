@@ -19,7 +19,8 @@
 						<input type="hidden" name="product_price" value="{{this.price}}">
 						<input type="hidden" name="product_primary_picture" value="{{this.primary_picture}}">
 						<input type="hidden" name="product_description" value="{{this.description}}">
-						<input type="submit" name="" value="{{this.name}}"  style="background-color:transparent; width: 100%; margin: 0px; height: 100%; border: 0px solid;text-align: center; padding: 15pt">
+						{{!-- <input type="submit" name="" value="{{this.name}} {{this.price}}"  style="background-color:transparent; width: 100%; margin: 0px; height: 100%; border: 0px solid;text-align: center; padding: 15pt"> --}}
+						<button type="submit" name="" style="background-color:transparent; width: 100%; margin: 0px; height: 100%; border: 0px solid;text-align: center; padding: 7pt">{{this.name}}</br>Php {{this.price}}</button>
 					</form>
 				</div>
 			</div>
